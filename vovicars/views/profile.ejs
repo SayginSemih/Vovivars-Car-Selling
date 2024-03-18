@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kullanıcı Profili</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/profile.css">
+  <style>
+    .profile-card {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+    }
+    .profile-card h2 {
+      margin-bottom: 20px;
+    }
+    .profile-info {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="header">
+                <img src="/img/vovicarslogo.png" alt="">
+                <div class="search-wrapper">
+                    <div class="wrapper">
+                      <form action="../anasayfa" method="POST" class="searchForm">
+                        <input style="margin-left: 60px; border-radius: 20px;" name="search" type="text" class="form-control" id="search" autocomplete="off" placeholder="Arama Yap">
+                    </form>
+                    <button style="margin-left: 60px; border-radius: 20px;" class="btn btn-secondary" id="search-button">Ara</button>
+                    </div>
+                </div>
+                <div>
+                    <ul class="navbar-wrapper" style="list-style-type: none;">
+                      <li>
+                        <a href="./yeni-ilan">Araba Sat</a>
+                      </li>
+                      <li>
+                        <a href="./arac-filtreleme">Araba Al</a>
+                      </li>
+                        <li>
+                          <% if (name==false) { %>
+                              <a href="./user/login">Giriş/Kayıt</a>
+                          <% } %>
+                          <% if (name!=false) { %>
+                              <a href="./user"><%= name %></a>
+                          <% } %>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="back-blur"></div>
+  <div class="container">
+    <div class="profile-card">
+      <h2>Kullanıcı Profili</h2>
+      <div class="profile-info">
+        <strong>E-Mail:</strong> <%= email %>
+      </div>
+      <div class="profile-info">
+        <strong>Kullanıcı Adı:</strong> <%= name %>
+      </div>
+      <div class="profile-info">
+        <strong>Adı:</strong> <%= firstname %>
+      </div>
+      <div class="profile-info">
+        <strong>Soyadı:</strong> <%= lastname %>
+      </div>
+      <div class="profile-info">
+        <strong>Kayıt Tarihi:</strong> <%= register_date %>
+      </div>
+      <a href="../anasayfa"><button type="button" class="btn btn-danger">Geri</button></a>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/js/profile.js"></script>
+</body>
+</html>

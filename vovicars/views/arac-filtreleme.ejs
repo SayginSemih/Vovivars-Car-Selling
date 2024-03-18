@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Araba Bilgileri</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/filter.css">
+    <style>
+        /* Özel CSS stilleri */
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="header">
+                <img src="/img/vovicarslogo.png" alt="">
+                <div class="search-wrapper">
+                    <div class="wrapper">
+                        <form action="./anasayfa" method="POST" class="myForm">
+                            <input style="margin-left: 60px;" name="search" type="text" class="form-control" id="search" autocomplete="off" placeholder="Arama Yap">
+                        </form>
+                        <button style="margin-left: 60px; border-radius: 20px;" class="btn btn-secondary" id="search-button">Ara</button>
+                    </div>
+                </div>
+                <div>
+                    <ul class="navbar-wrapper" style="list-style-type: none;">
+                        <li>
+                            <a href="./yeni-ilan">Araba Sat</a>
+                          </li>
+                          <li>
+                            <a href="./arac-filtreleme">Araba Al</a>
+                          </li>
+                        <li>
+                            <% if (name==false) { %>
+                                <a href="./user/login">Giriş/Kayıt</a>
+                            <% } %>
+                            <% if (name!=false) { %>
+                                <a href="./user"><%= name %></a>
+                            <% } %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="back-blur"></div>
+    <div class="container">
+        <div class="new-car-wrapper">
+            <div class="selection-menu">
+                <form method="POST" action="./arac-filtreleme" id="myForm">
+                <center><div class="cars-title">Araç Menüsü</div></center>
+                <hr>
+
+                <select name="aracmarka" class="form-select aracMarka" aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir marka seçiniz.</option>
+                </select>
+                <br>
+
+                <select name="aracmodel" class="form-select aracModel" aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir model seçiniz.</option>
+                </select>
+                <br>
+
+                <select name="aracseri" class="form-select aracSeri" aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir seri seçiniz.</option>
+                </select>
+                <br>
+
+                <div class="form-group">
+                    </div>
+                </form>
+                    <center><button id="gonder" class="btn btn-primary">Filtrele</button></center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS ve jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/carList.js"></script>
+    <script src="/js/ilan-olustur.js"></script>
+    <script src="anasayfa.ejs"></script>
+</body>
+</html>

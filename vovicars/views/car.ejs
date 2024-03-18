@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Araba Bilgileri</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/car.css">
+    <style>
+        /* Özel CSS stilleri */
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="header">
+                <img src="/img/vovicarslogo.png" alt="">
+                <div class="search-wrapper">
+                    <div class="wrapper">
+                        <input name="search" type="text" class="form-control" id="search" autocomplete="off" placeholder="Arama Yap">
+                        <button class="btn btn-secondary" type="submit" id="search-button">Ara</button>
+                    </div>
+                </div>
+                <div>
+                    <ul class="navbar-wrapper" style="list-style-type: none;">
+                        <li>
+                          <a href="#">Araba Sat</a>
+                        </li>
+                        <li>
+                          <a href="#">Araba Al</a>
+                        </li>
+                        <li>
+                          <a href="#">Giriş/Kayıt</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="back-blur"></div>
+    <div class="container">
+        <div class="car-description-wrapper">
+            <div class="ilan-wrapper">
+                <div class="images" style="width: 1000px;">
+                    <img class="car-image" src="/resimler/<%= images[0] %>"></img>
+                    <hr>
+                    <div class="other-images">
+                        <% for( let index = 0; index < images.length-1; index++ ) { %>
+                            <img class="other-image" src="/resimler/<%= images[index] %>"></img>
+                        <% } %>
+                        <hr>
+                        <p style="padding-left: 10px;">
+                            <%= car.aciklama %>
+                        </p>
+                    </div>
+                </div>
+                <div class="ilan" style="width: 500px;">
+                    <h4>İlan No: <%= car.ID %></h4>
+                    <p style="color: blue;"><strong>Fiyat:</strong> <%= car.fiyat %> TL</p>
+                    <p><strong>İlan Tarihi:</strong><%= date %></p>
+                    <p><strong>Marka:</strong> <%= car.marka %></p>
+                    <p><strong>Seri:</strong> <%= car.seri %></p>
+                    <p><strong>Model:</strong> <%= car.model %></p>
+                    <p><strong>Yıl:</strong> <%= car.yil %></p>
+                    <p><strong>Yakıt:</strong> <%= car.yakit %></p>
+                    <p><strong>Vites:</strong> <%= car.vites %></p>
+                    <p><strong>Araç Durumu:</strong> <%= car.aracdurumu %></p>
+                    <p><strong>KM:</strong> <%= car.km %></p>
+                    <p><strong>Kasa Tipi:</strong> <%= car.kasatipi %></p>
+                    <p><strong>Motor Gücü:</strong> <%= car.motorgucu %> HP</p>
+                    <p><strong>Motor Hacmi:</strong> <%= car.motorhacmi %> cm3</p>
+                    <p><strong>Çekiş:</strong> <%= car.cekis %></p>
+                    <p><strong>Renk:</strong> <%= car.renk %></p>
+                    <p><strong>Garanti:</strong> <%= car.garanti %></p>
+                    <p><strong>Ağır Hasar Kaydı:</strong> <%= car.agirhasarkaydi %></p>
+                    <p><strong>Plaka / Uyruk:</strong> <%= car.plakauyruk %></p>
+                    <p><strong>Takas:</strong> <%= car.takas %></p>
+                    <p><strong>Satıcı:</strong><a href="../profile/<%= car.satici %>"><%= car.satici %></a></p>
+                    <p><strong>İletişim:</strong><%= car.iletisim %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS ve jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/car.js"></script>
+</body>
+</html>

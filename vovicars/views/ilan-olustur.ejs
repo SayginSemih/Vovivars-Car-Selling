@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Araba Bilgileri</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/filter.css">
+    <style>
+        /* Özel CSS stilleri */
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="header">
+                <img src="/img/vovicarslogo.png" alt="">
+                <div class="search-wrapper">
+                    <div class="wrapper">
+                        <form action="./anasayfa" method="POST" class="searchForm">
+                            <input style="margin-left: 60px;" name="search" type="text" class="form-control" id="search" autocomplete="off" placeholder="Arama Yap">
+                        </form>
+                        <button style="margin-left: 60px; border-radius: 20px;" class="btn btn-secondary" id="search-button">Ara</button>
+                    </div>
+                </div>
+                <div>
+                    <ul class="navbar-wrapper" style="list-style-type: none;">
+                        <li>
+                            <a href="./yeni-ilan">Araba Sat</a>
+                          </li>
+                          <li>
+                            <a href="./arac-filtreleme">Araba Al</a>
+                          </li>
+                        <li>
+                            <% if (name==false) { %>
+                                <a href="./user/login">Giriş/Kayıt</a>
+                            <% } %>
+                            <% if (name!=false) { %>
+                                <a href="./user"><%= name %></a>
+                            <% } %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="back-blur"></div>
+    <div class="container">
+        <div class="new-car-wrapper">
+            <div class="selection-menu">
+                <form method="POST" action="./yeni-ilan" id="myForm" enctype="multipart/form-data">
+                <center><div class="cars-title">Satış İlanı Oluştur</div></center>
+                <hr>
+
+                <select name="aracmarka" class="form-select aracMarka" aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir marka seçiniz.</option>
+                </select>
+                <br>
+
+                <select name="aracmodel" class="form-select aracModel" aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir model seçiniz.</option>
+                </select>
+                <br>
+
+                <select name="aracseri" class="form-select aracSeri" aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir seri seçiniz.</option>
+                </select>
+                <br>
+
+                <select name="aracyakit" class="form-select " aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir yakıt türü seçiniz.</option>
+                    <option>Dizel</option>
+                    <option>Benzin</option>
+                    <option>Benzin / LPG</option>
+                    <option>Elektrikli</option>
+                </select>
+                <br>
+
+                <select name="aracvitesturu" class="form-select " aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir vites türü seçiniz.</option>
+                    <option>Manuel</option>
+                    <option>Otomatik</option>
+                </select>
+                <br>
+
+                <select name="aracdurumturu" class="form-select " aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir araç durumu türü seçiniz.</option>
+                    <option>Sıfır</option>
+                    <option>İkinci El</option>
+                </select>
+                <br>
+
+                <select name="arackasatipi" class="form-select " aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir kasa tipi türü seçiniz.</option>
+                    <option>Sedan</option>
+                    <option>Hatchback</option>
+                    <option>Kombi</option>
+                    <option>Minivan</option>
+                    <option>Station Wagon</option>
+                    <option>Coupe</option>
+                    <option>Pick-Up</option>
+                    <option>SUV</option>
+                </select>
+                <br>
+
+                <select name="araccekisturu" class="form-select " aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir çekiş türü seçiniz.</option>
+                    <option>Önden Çekiş</option>
+                    <option>Arkadan Çekiş</option>
+                </select>
+                <br>
+
+                <select name="aracgarantidurumu" class="form-select " aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir garanti durumu seçiniz.</option>
+                    <option>Evet</option>
+                    <option>Hayır</option>
+                </select>
+                <br>
+
+                <select name="arachasarkaydi" class="form-select " aria-label="Default select example">
+                    <!-- Car brands will be dynamically added here -->
+                    <option selected>Lütfen bir ağır hasar kaydı durumu belirtiniz.</option>
+                    <option>Evet</option>
+                    <option>Hayır</option>
+                </select>
+                <div class="form-group">
+                        <div class="form-group">
+                            <input id="form-control" name="fiyat" type="text" class="form-control" id="fiyat" placeholder="Fiyat" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="yil" type="text" class="form-control" id="yil" placeholder="Yıl" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="km" type="text" class="form-control" id="km" placeholder="KM" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="motorgucu" type="text" class="form-control" id="motorgucu" placeholder="Motor Gücü" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="motorhacmi" type="text" class="form-control" id="motorhacmi" placeholder="Motor Hacmi" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="renk" type="text" class="form-control" id="renk" placeholder="Renk" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="plakauyruk" type="text" class="form-control" id="plakauyruk" placeholder="Plaka/Uyruk" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="takas" type="text" class="form-control" id="takas" placeholder="Takas" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="iletisim" type="text" class="form-control" id="iletisim" placeholder="İletişim" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="baslik" type="text" class="form-control" id="baslik" placeholder="Başlık" autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <input id="form-control" name="aciklama" type="text" class="form-control" id="aciklama" placeholder="Açıklama" autocomplete="off">
+                        </div>
+                    </div>
+                    <br>
+                    <label for="kucukresim"><strong style="margin-left: 37px;">Küçük Resim : </strong></label>
+                    <input name="kucukresim" class="kucukresim" type="file" accept="image/*">
+                    <br>
+                    <label for="resimler"><strong>Araba Resmimleri : </strong></label>
+                    <input multiple name="resimler" class="resimler" type="file" accept="image/*">
+                    <br><br>
+                </form>
+                    <center><button id="gonder" class="btn btn-primary">Gönder</button></center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS ve jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/carList.js"></script>
+    <script src="/js/ilan-olustur.js"></script>
+</body>
+</html>
