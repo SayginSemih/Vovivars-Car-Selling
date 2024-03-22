@@ -43,7 +43,6 @@ const storage = multer.diskStorage({
   router.get("/cars/:id", async (req, res) => {
     const id=req.params.id
     const token = tokenController(req)
-    const date_=new Date();
     var image=[];
     if (token)
         db.query("SELECT * FROM ilanlar WHERE id=?", [id], (err, r) => {
@@ -54,7 +53,7 @@ const storage = multer.diskStorage({
         res.render("car", {
             car: r[0],
             images: resimler_,
-            date: date_
+            name: req.session.token
         })
       }
       catch
@@ -83,6 +82,43 @@ router.get("/arac-filtreleme", async (req, res) => {
         });
       }
   });
+
+  router.get("/ilanlarim", async (req, res) => {
+    const token = tokenController(req)
+    if (token)
+    {
+      db.query("SELECT * FROM ilanlar WHERE satici=?", [req.session.token], (err, ilan) => {
+        res.render("ilanlar", {
+          ilan,
+          name: req.session.token 
+        });
+      })
+    }
+    else
+    {
+      res.redirect("./user/login");
+    }
+});
+
+router.post("/ilanlarim", urlencodedParser,async (req, res) => {
+  var ilanid=req.body.ilan_id;
+  const token = tokenController(req)
+  if (token)
+  {
+    db.query("DELETE FROM ilanlar WHERE ID=?", [ilanid], (err, dlt) => {
+      db.query("SELECT * FROM ilanlar WHERE satici=?", [req.session.token], (error_, ilan) => {
+        res.render("ilanlar", {
+          name: req.session.token,
+          ilan
+        })
+      })
+    })
+  }
+  else
+  {
+    res.redirect("./user/login");
+  }
+});
 
   router.post("/arac-filtreleme", urlencodedParser, async (req, res) => {
       var username = req.session.token
@@ -148,7 +184,8 @@ router.get("/yeni-ilan", async (req, res) => {
     {
         aracseri="Girilmemiş";
     }
-    var _date = new Date();
+    var date__=new Date();
+    var date_= date__.getDay() + "/" + date__.getMonth() + "/" + date__.getFullYear();
     var aracyakit=req.body.aracyakit
     var aracvitesturu=req.body.aracvitesturu
     var aracdurumturu=req.body.aracdurumturu
@@ -167,12 +204,23 @@ router.get("/yeni-ilan", async (req, res) => {
     var iletisim=req.body.iletisim
     var baslik=req.body.baslik
     var aciklama=req.body.aciklama
-    var kucukresim = req.files['kucukresim'][0].filename
+    var kucukresim;
+    try
+    {
+      kucukresim = req.files['kucukresim'][0].filename;
+    }
+    catch{ return res.render("ilan-olustur", {
+      name: req.session.token}) }
     var resimler=[];
     var resim="";
-    req.files['resimler'].map(r => {
+    try
+    {
+      req.files['resimler'].map(r => {
         resimler.push(r.filename)
     })
+    }
+    catch{ return res.render("ilan-olustur", {
+      name: req.session.token}) }
     for (let i = 0 ; i<=resimler.length ; i++)
     {
         if (i==resimler.length)
@@ -185,7 +233,7 @@ router.get("/yeni-ilan", async (req, res) => {
         }
     }
     db.query("INSERT INTO ilanlar (satici, iletisim, fiyat, marka, model, seri, yil, yakit, vites, aracdurumu, km, kasatipi, motorgucu, motorhacmi, cekis, renk, garanti, agirhasarkaydi, plakauyruk, takas, aciklama, baslik, tarih ,kucukresim, resimler) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", 
-    [username,iletisim,fiyat,aracmarka,aracmodel,aracseri,yil,aracyakit,aracvitesturu,aracdurumturu,km,arackasatipi,motorgucu,motorhacmi,araccekisturu,renk,aracgarantidurumu,arachasarkaydi,plakauyruk,takas, aciklama, baslik, _date, kucukresim,resim]
+    [username,iletisim,fiyat,aracmarka,aracmodel,aracseri,yil,aracyakit,aracvitesturu,aracdurumturu,km,arackasatipi,motorgucu,motorhacmi,araccekisturu,renk,aracgarantidurumu,arachasarkaydi,plakauyruk,takas, aciklama, baslik, date_, kucukresim,resim]
     , (err, r) => {
         if (err) throw err;
         console.log("KAYIT BAŞARILI");

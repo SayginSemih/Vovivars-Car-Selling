@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Öğrenci Ekleme Ekranı</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/students.css">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2 class="mb-4"><center>İlanlarım</center></h2>
+        <table class="table table-hover">
+            <thead class="tr-wrapper">
+              <tr>
+                <th scope="col">İlan Açıklaması</th>
+                <th scope="col">İlanı Sil</th>
+              </tr>
+              <% for( let index = 0; index < ilan.length; index++ ) { %>
+                <tr id="<%= ilan[index].ID %>">
+                    <td><%= ilan[index].aciklama %></td>
+                    <td><button class="delete-button btn btn-danger" id="delete-button">Sil</button></td>
+                </tr>
+              <% } %>
+            </thead>
+            <tbody class="student-list">
+            </tbody>
+        </table>
+        <form id="myForm" method="POST" action="./ilanlarim">
+            <input type="hidden" name="ilan_id" id="ilan-id">
+            <a href="./update-user"><button type="button" class="btn btn-danger">Çık</button></a>
+        </form>
+    </div>
+    <script src="/js/ilanlar.js"></script>
+</body>
+</html>

@@ -21,8 +21,10 @@
                 <img src="/img/vovicarslogo.png" alt="">
                 <div class="search-wrapper">
                     <div class="wrapper">
-                        <input name="search" type="text" class="form-control" id="search" autocomplete="off" placeholder="Arama Yap">
-                        <button class="btn btn-secondary" type="submit" id="search-button">Ara</button>
+                        <form action="../anasayfa" method="POST" class="searchForm">
+                            <input style="margin-left: 60px; border-radius: 20px;" name="search" type="text" class="form-control" id="search" autocomplete="off" placeholder="Arama Yap">
+                        </form>
+                        <button style="margin-left: 60px; border-radius: 20px;" class="btn btn-secondary" id="search-button">Ara</button>
                     </div>
                 </div>
                 <div>
@@ -34,7 +36,12 @@
                           <a href="#">Araba Al</a>
                         </li>
                         <li>
-                          <a href="#">Giriş/Kayıt</a>
+                            <% if (name==false) { %>
+                                <a href="./user/login">Giriş/Kayıt</a>
+                            <% } %>
+                            <% if (name!=false) { %>
+                                <a href="../user"><%= name %></a>
+                            <% } %>
                         </li>
                     </ul>
                 </div>
@@ -61,7 +68,7 @@
                 <div class="ilan" style="width: 500px;">
                     <h4>İlan No: <%= car.ID %></h4>
                     <p style="color: blue;"><strong>Fiyat:</strong> <%= car.fiyat %> TL</p>
-                    <p><strong>İlan Tarihi:</strong><%= date %></p>
+                    <p><strong>İlan Tarihi:</strong><%= car.tarih %></p>
                     <p><strong>Marka:</strong> <%= car.marka %></p>
                     <p><strong>Seri:</strong> <%= car.seri %></p>
                     <p><strong>Model:</strong> <%= car.model %></p>
